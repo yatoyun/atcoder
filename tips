@@ -1,0 +1,90 @@
+import sys
+input = sys.stdin.readline
+
+def main():
+    
+
+if __name__ == "__main__":
+    main()
+
+| 排他的論理和は一つだけ他と違う値を見つけるのがとても簡単
+
+x = 12
+y = 10
+z = 12
+
+print(x ^ y ^ z)
+
+>>10
+
+| キュー(queue) スタック(stack)
+from collections import deque
+q = deque()
+append(), appendleft(), pop(), popleft()
+
+| 多項式計算
+from numpy import poly1d
+
+| 満たしているか
+from collections import Counter
+input()
+A = Counter(input().split())
+B = Counter(input().split())
+print("No" if B - A else "Yes")
+
+| 組み合わせ
+import itertools
+itertools.combinations
+
+| 重複なしの配列
+set(list(map(int, input().split())))
+
+| dp bit仕様
+240-c.py
+
+| 全て配列で辞書を作成　また、キーと値が反対のペアも含む
+from collections import defaultdict
+
+| BFS, DFS っぽいの
+277-c.py
+
+| 優先度付きqueue
+import heapq
+リストをheapqに変換
+heapq.heapify(list)
+最小値を取り出す
+heapq.heappop(a)
+
+| 値以上または値より大きい値の最小のindexを返す
+https://www.kueharx.com/2021/05/cstdlowerboundpython.html
+
+| 総当たり 足して xになる組み合わせ
+ans_list = {0}
+for a in map(int, input().split()):
+    for b in [*ans_list]:
+        ans_list.add(a+b)
+|素数判定
+def is_prime3(q,k=50):
+    q = abs(q)
+    #計算するまでもなく判定できるものははじく
+    if q == 2: return True
+    if q < 2 or q&1 == 0: return False
+
+    #n-1=2^s*dとし（但しaは整数、dは奇数)、dを求める
+    d = (q-1)>>1
+    while d&1 == 0:
+        d >>= 1
+
+    #判定をk回繰り返す
+    for i in xrange(k):
+        a = random.randint(1,q-1)
+        t = d
+        y = pow(a,t,q)
+        #[0,s-1]の範囲すべてをチェック
+        while t != q-1 and y != 1 and y != q-1:
+            y = pow(y,2,q)
+            t <<= 1
+        if y != q-1 and t&1 == 0:
+            return False
+    return True
+
