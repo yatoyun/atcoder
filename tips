@@ -17,43 +17,17 @@ print(x ^ y ^ z)
 
 >>10
 
-| キュー(queue) スタック(stack)
-from collections import deque
-q = deque()
-append(), appendleft(), pop(), popleft()
+| SortedSet
+https://github.com/tatyam-prime/SortedSet
 
 | 多項式計算
 from numpy import poly1d
 
-| 満たしているか
-from collections import Counter
-input()
-A = Counter(input().split())
-B = Counter(input().split())
-print("No" if B - A else "Yes")
-
-| 組み合わせ
-import itertools
-itertools.combinations
-
-| 重複なしの配列
-set(list(map(int, input().split())))
-
 | dp bit仕様
 240-c.py
 
-| 全て配列で辞書を作成　また、キーと値が反対のペアも含む
-from collections import defaultdict
-
 | BFS, DFS っぽいの
 277-c.py
-
-| 優先度付きqueue
-import heapq
-リストをheapqに変換
-heapq.heapify(list)
-最小値を取り出す
-heapq.heappop(a)
 
 | 値以上または値より大きい値の最小のindexを返す
 https://www.kueharx.com/2021/05/cstdlowerboundpython.html
