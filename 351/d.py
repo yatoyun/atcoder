@@ -29,12 +29,13 @@ def main():
         visited = set()
         stack = [(i, j)]
         while stack:
-            x, y = stack.pop()
-            if (x, y) in visited:
+            node = stack.pop()
+            if node in visited:
                 continue
-            visited.add((x, y))
-            if (x, y) in free_node:
-                free_visited.add((x, y))
+            visited.add(node)
+            x, y = node
+            if node in free_node:
+                free_visited.add(node)
                 for d in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
                     nx, ny = x+d[0], y+d[1]
                     if not (0 <= nx < H and 0 <= ny < W):
