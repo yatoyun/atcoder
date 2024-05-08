@@ -14,7 +14,6 @@ if __name__=="__main__":
     import sys, os
     input = sys.stdin.readline
     atcenv = os.environ.get("ATCODER", 0)
-
     main()
 
 | 排他的論理和は一つだけ他と違う値を見つけるのがとても簡単
