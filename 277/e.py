@@ -1,5 +1,4 @@
-from collections import defaultdict
-import heapq as hq
+from collections import defaultdict, deque
 def main():
     N, M, K = mapint()
     
@@ -14,17 +13,16 @@ def main():
     
     dist = [[float("inf")]*(N+1) for _ in range(2)]
     
-    que = [(0, 1, 1)]
-    hq.heapify(que)
+    que = deque([(1, 1, 0)])
     while que:
-        d, v, a = hq.heappop(que)
+        a, v, d = que.popleft()
         if dist[a][v] <= d or dist[0][-1] <= d or dist[1][-1] <= d:
             continue
         dist[a][v] = d
         if v in switch:
-            hq.heappush(que, (d, v, 1-a))
+            que.appendleft((1-a, v, d))
         for u in edges[a][v]:
-            hq.heappush(que, (d+1, u, a))
+            que.append((a, u, d+1))
     
     ans = min(dist[0][-1], dist[1][-1])
     print(ans if ans != float("inf") else -1)
