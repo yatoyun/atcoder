@@ -2,23 +2,30 @@ from collections import defaultdict
 def main():
     N = ini()
     
-    nums = [0 for _ in range(N+1)]
-    num_num = defaultdict(int)
+    sq = [False]*(N+1)
+    d = [[] for _ in range(N+1)]
     for i in range(1, N+1):
-        max_div = 1
-        for j in range(int(i**0.5)+1, 1, -1):
-            div = j * j
-            if i%div == 0:
-                max_div = div
-                break
-        nums[i] = i // max_div
-        num_num[i // max_div] += 1
-
-    ans = N
-    for k, v in num_num.items():
-        ans += (v-1)*v
+        if i*i > N:
+            break
+        sq[i*i] = True
+    
+    for i in range(1, N+1):
+        for j in range(i, N+1, i):
+            d[j].append(i)
+    cnt = [0]*(N+1)
+    for i in range(1, N+1):
+        f = 0
+        for j in d[i]:
+            if sq[j]:
+                f = j
+        if f == 0:
+            cnt[i] += 1
+            continue
+        cnt[i//f] += 1
+    ans = 0
+    for i in range(1, N+1):
+        ans += cnt[i]**2
     print(ans)
-        
 
 
 def ini(): return int(input())
