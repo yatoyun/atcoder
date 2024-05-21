@@ -2,22 +2,21 @@ from collections import defaultdict
 def main():
     N = ini()
     A = lint()
-    
-    nums = [0] * (max(A)+1)
+    max_a = max(A)
+    nums = [0] * (max_a+1)
     nums_dict = defaultdict(int)
     for a in A:
         nums[a] += 1
         nums_dict[a] += 1
     ans = 0
-    for a, v in nums_dict.items():
+    for q, q_v in nums_dict.items():
         cnt = 0
-        for x in range(1, int(a**0.5)+1):
-            if a%x==0:
-                if x == a//x:
-                    cnt += nums[x] * nums[x]
-                    continue
-                cnt += nums[x] * nums[a//x] * 2
-        ans += cnt * v
+        for r in range(1,max_a+1):
+            if q*r > max_a:
+                break
+            cnt += q_v * nums[r] * nums[q*r] # q*r = p
+        ans += cnt
+            
     print(ans)
         
         
