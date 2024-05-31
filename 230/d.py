@@ -1,30 +1,18 @@
-from bisect import bisect_left, bisect_right
-from sortedcontainers import SortedList
-
-def key_func(x):
-    if type(x)==int:
-        return x
-    return x[1]
-
 def main():
     N, D = mapint()
-    ranges = [tuple(lint()) for _ in range(N)]
-    ranges_right = SortedList(ranges, key=key_func)
-    ranges.sort()
-    ranges_left = [x[0] for x in ranges]
+    ranges = [lint() for _ in range(N)]
+    ranges.sort(key=lambda x: x[1])
     
     index = 0
+    x = -10**10
     cnt = 0
     while index < N:
-        curr_right = ranges_right[0][1]
-        new_index = bisect_right(ranges_left, curr_right+D-1)
-        # remove
-        for i in range(index, new_index):
-            ranges_right.remove(ranges[i])
-        cnt += 1
-        index = new_index
+        l, r = ranges[index]
+        if x+D-1 < l:
+            x = r
+            cnt += 1
+        index += 1
     print(cnt)
-        
 
 def ini(): return int(input())
 def mapint(): return map(int, input().split())
