@@ -4,25 +4,10 @@ def main():
     mod = 998244353
 
     N = ini()
-    length = len(str(N))
-    total = 0
+    K = len(str(N))
     with ModContext(mod):
-        final_ans = Modint(0)
-        def calc(n, curr):
-            return (Modint(10)**(length*n)) * curr
-        while total < N:
-            n = 1
-            ans = (Modint(10)**(length*total))*Modint(N)
-            while n + total <= N:
-                if n + total + 1 != N and n * 2 + total <= N:
-                    tmp = ans
-                    ans += calc(n, tmp)
-                    n *= 2
-                else:
-                    break
-            total += n
-            final_ans += ans
-        print(final_ans.val())
+        ans = Modint(N)*(Modint(10)**(N*K)-1)// (Modint(10)**K-1)
+        print(ans.val())
 
 def ini(): return int(input())
 def mapint(): return map(int, input().split())
