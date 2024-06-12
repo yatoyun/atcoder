@@ -1,16 +1,22 @@
 def main():
     N = ini()
-    S = lstr()
+    S = list(map(int,lstr()))
     
-    zero, one = 0, 0
+    dp = [[0]*2 for _ in range(N+1)]
+    
+    for i in range(N):
+        dp[i][S[i]] = 1
+    
+    for i in range(N-1):
+        for j in range(2):
+            if j * S[i+1] == 1:
+                dp[i+1][0] += dp[i][j]
+            else:
+                dp[i+1][1] += dp[i][j]
+    
     ans = 0
-    for a in S:
-        if a == '0':
-            zero, one = 1, zero + one
-        else:
-            zero, one = one, zero + 1
-        ans += one
-        errprint(zero, one, ans)
+    for i in range(N):
+        ans += dp[i][1]
     print(ans)
 
 def ini(): return int(input())
