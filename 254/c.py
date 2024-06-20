@@ -1,25 +1,25 @@
-from bisect import bisect_left, bisect_right
 def main():
     N, K = mapint()
     A = lint()
-    sortedA = sorted(A)
     
-    visited = set()
-    for i, a in enumerate(A):
-        left = bisect_left(sortedA, a)
-        right = bisect_right(sortedA, a)
-        
-        for index in range(left, right):
-            if index in visited:
-                continue
-            if abs(i-index) % K == 0:
-                visited.add(index)
-                break
-            
-        else:
+    arrK = [[] for _ in range(K)]
+    for i in range(N):
+        arrK[i%K].append(A[i])
+    
+    for i in range(K):
+        arrK[i].sort()
+    
+    final = []
+    for i in range(N):
+        final.append(arrK[i%K][i//K])
+    
+    for i in range(N-1):
+        if final[i] > final[i+1]:
             print("No")
             return
     print("Yes")
+    
+    
 def ini(): return int(input())
 def mapint(): return map(int, input().split())
 def mapint0(): return map(lambda x: int(x)-1, input().split())
